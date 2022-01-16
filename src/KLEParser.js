@@ -55,16 +55,34 @@ export function parseKle(kleText) {
 
     // *The other exception is rotated keys,* which persists for all future keys until reset (r, rx, ry).
     // - rx and ry default to 0 (rotation anchors)
+    // - In addition, when rx and/or ry are given, they overwrite the current cursor positions 
+    // - For example, if a decorator had rx:7 and x:2, the cursor would be set to 7, then 2 would be added as an offset
+    // - All future rows will also continue with this rx as the offset in addition to the X and Y cursor (i.e. with rx:7, the next row will begin at 7 offset)
 
-    // Persistent elements
+    // Therefore to calculate the global coordinate of a key, would need to do the following:
+    // 1. Translate the cursor by rx and ry
+    // 2. Rotate the cursor by r
+    // 3. Translate the cursor by the total x and y saved to the Key object
+    // 4. If wanting the center coords of the key, translate the cursor by half the width and height
+    // 5. Multiply by unit size
+
+    // Then after writing all the above, found that rotation handling is incorrect
+    // I have very strong opinions about KLE syntax that I won't bother going into here, but whatever
+    // Nobody should be using KLE to make exact rotated plates anyways
+
+    // Solved by brute force by staring down the KLE source and trial and error
+    // Still don't know how it works, so if you're wanting an in-depth explanation of kle rotation syntax look elsewhere
+
+    // Tracker vars
     let keys = [];
     let currX = new Decimal(0);
     let currY = new Decimal(0);
     let currAngle = new Decimal(0);
     let currRotX = new Decimal(0);
     let currRotY = new Decimal(0);
+    let clusterX = new Decimal(0);
+    let clusterY = new Decimal(0);
 
-    // Transient elements
     let decal = false;
     let width = new Decimal(1);
     let height = new Decimal(1);
@@ -79,7 +97,7 @@ export function parseKle(kleText) {
         for (const row of kleData) {
 
             for (const element of row) {
-    
+
                 // Case 1: Element is a string and therefore is a key
                 if (typeof element === 'string') {
                     // If previous decorator marked this key as a decal, reset the transients and skip
@@ -103,12 +121,32 @@ export function parseKle(kleText) {
                         height2 = null
                     }
                 }
-    
+
                 // Case 2: Element is not a string and is therefore (should be) a decorator
                 else if (element === Object(element)) {
 
                     // Check for fields
-                    // First the transients
+
+                    // Rotations
+                    if (element.hasOwnProperty('r')) {
+                        Decimal.set({precision: 1000000, defaults: true})
+                        currAngle = new Decimal(element.r)
+                        Decimal.set({defaults: true})
+                    }
+                    if (element.hasOwnProperty('rx')) {
+                        currRotX = new Decimal(element.rx)
+                        clusterX = new Decimal(element.rx)
+                        currX = clusterX
+                        currY = clusterY
+                    }
+                    if (element.hasOwnProperty('ry')) {
+                        currRotY = new Decimal(element.ry)
+                        clusterY = new Decimal(element.ry)
+                        currX = clusterX
+                        currY = clusterY
+                    }
+
+                    // Transients
                     if (element.hasOwnProperty('d')) {
                         decal = new Decimal(element.d)
                     }
@@ -125,36 +163,30 @@ export function parseKle(kleText) {
                         height2 = new Decimal(element.h2)
                     }
 
-                    // Then the persistent
+                    // Cursor offsets
                     if (element.hasOwnProperty('x')) {
                         currX = currX.plus(element.x)
                     }
                     if (element.hasOwnProperty('y')) {
-                        currX = currY.plus(element.y)
-                    }
-                    if (element.hasOwnProperty('r')) {
-                        currAngle = new Decimal(element.r)
-                    }
-                    if (element.hasOwnProperty('rx')) {
-                        currRotX = new Decimal(element.rx)
-                    }
-                    if (element.hasOwnProperty('ry')) {
-                        currRotY = new Decimal(element.ry)
+                        currY = currY.plus(element.y)
                     }
 
                 }
 
                 // Otherwise... malformed input (i.e. some random integer literal)
                 else {
-                    
+
                     console.error("Invalid element found")
                     return null
 
                 }
-    
+
             }
 
             // All elements of a row are completed
+            // Reset X cursor to default
+            // Note: This was rotX rather than 0
+            currX = currRotX
             // Increment Y cursor to prepare for next row
             currY = currY.plus(1)
 

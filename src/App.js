@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button, Container, Card, Form } from 'react-bootstrap';
 import json5 from "json5";
 import { parseKle } from "./KLEParser";
+import Decimal from "decimal.js";
+
 
 function App() {
 
@@ -21,6 +23,7 @@ function App() {
     let keyStringArr = []
     for (const key of kleData) {
       keyStringArr.push(key.toString())
+      // console.log(key.getGlobalPosition(19.05).centerX.toString())
     }
     console.log(keyStringArr)
   }
