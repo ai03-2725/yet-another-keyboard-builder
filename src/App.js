@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Container, Card, Form } from 'react-bootstrap';
 import json5 from "json5";
 import { parseKle } from "./KLEParser";
@@ -8,25 +8,15 @@ import Decimal from "decimal.js";
 function App() {
 
   const [kleText, setKleText] = useState("")
-  // const [kleData, setKleData] = useState(null)
+  const [kleData, setKleData] = useState(null)
   console.log("KLE input text: " + kleText)
 
   let statusMessage = ""
 
-  let kleData = parseKle(kleText)
-  if (kleData === null) {
-    statusMessage = "Parse failed"
-  }
-  else {
-    statusMessage = "Parsed successfully"
-    console.log("Parsed output of key objects:")
-    let keyStringArr = []
-    for (const key of kleData) {
-      keyStringArr.push(key.toString())
-      // console.log(key.getGlobalPosition(19.05).centerX.toString())
-    }
-    console.log(keyStringArr)
-  }
+  // console.log(parseKle(kleText))
+  useEffect(() => {
+    setKleData(parseKle(kleText))
+  }, [kleText])
 
   return (
     <Container className="App">
@@ -44,6 +34,9 @@ function App() {
         </Form>
       </Card>
       <p>{statusMessage}</p>
+      {kleData !== null &&
+      <p>Set</p>
+      }
       
     </Container>
   );
