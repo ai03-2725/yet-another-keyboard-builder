@@ -2,7 +2,7 @@ import Decimal from "decimal.js";
 
 export class Key {
 
-    constructor(x, y, width, height, width2, height2, angle, rotx, roty) {
+    constructor(x, y, width, height, width2, height2, angle, rotx, roty, independentSwitchAngle, stabilizerAngle, shift6UStabilizers, skipOrientationFix) {
         this.x = x;             // NOT x from KLE syntax (KLE x refers to sequential offset)
         this.y = y;             // NOT y from KLE syntax (KLE y refers to sequential offset)
         this.width = width;     // w
@@ -12,33 +12,51 @@ export class Key {
         this.angle = angle;     // r
         this.rotx = rotx;       // rx
         this.roty = roty        // ry
+        this.stabilizerAngle = stabilizerAngle
+        this.shift6UStabilizers = shift6UStabilizers
+        this.independentSwitchAngle = independentSwitchAngle
+        this.skipOrientationFix = skipOrientationFix
 
-        // Generate center-coords
-        const translatedX = this.x.plus(this.width.dividedBy(new Decimal(2))).minus(this.rotx)
-        const translatedY = this.y.plus(this.height.dividedBy(new Decimal(2))).minus(this.roty)
-        this.centerX = translatedX;
-        this.centerY = translatedY;
+        // Generate center-coords and corners
+        this.centerX = this.x.plus(this.width.dividedBy(new Decimal(2)))
+        this.centerY = this.y.plus(this.height.dividedBy(new Decimal(2)))
+
+        // this.corners = [
+        //     {x: new Decimal(this.x), y: new Decimal(this.y)}, 
+        //     {x: this.x.plus(this.width), y: new Decimal(this.y)},
+        //     {x: new Decimal(this.x), y: this.y.plus(this.height)}, 
+        //     {x: this.x.plus(this.width), y: this.y.plus(this.height)}
+        // ]
+
+        let cos = null
+        let sin = null
 
         if (!this.angle.equals(0)) {
 
-            // Decimal.set({precision: 100, defaults: true})
+            cos = this.angle.dividedBy(new Decimal(180)).times(Decimal.acos(-1)).cos()
+            sin = this.angle.dividedBy(new Decimal(180)).times(Decimal.acos(-1)).sin()
 
-            const cos = this.angle.dividedBy(new Decimal(180)).times(Decimal.acos(-1)).cos()
-            const sin = this.angle.dividedBy(new Decimal(180)).times(Decimal.acos(-1)).sin()
+            const translatedX = this.centerX.minus(this.rotx);
+            const translatedY = this.centerY.minus(this.roty);
 
-            const rotatedX = translatedX.times(cos).minus(translatedY.times(sin))
-            const rotatedY = translatedX.times(sin).plus(translatedY.times(cos))
+            this.centerX = translatedX.times(cos).minus(translatedY.times(sin)).plus(this.rotx)
+            this.centerY = translatedX.times(sin).plus(translatedY.times(cos)).plus(this.roty)
 
-            const translatedBackX = rotatedX.plus(this.rotx)
-            const translatedBackY = rotatedY.plus(this.roty)
+            // for (let i = 0; i < this.corners.length; i += 1) {
 
-            // Decimal.set({ defaults: true })
-            this.centerX = translatedBackX;
-            this.centerY = translatedBackY;
+            //     const translatedCornerX = this.corners[i].x.minus(this.rotx);
+            //     const translatedCornerY = this.corners[i].y.minus(this.roty);
+
+            //     this.corners[i].x = translatedCornerX.times(cos).minus(translatedCornerY.times(sin)).plus(this.rotx)
+            //     this.centerY = translatedCornerX.times(sin).plus(translatedCornerY.times(cos)).plus(this.roty)
+
+            // }
 
         }
 
     }
+
+
 
     toString() {
         let returnStr = "x: " + this.x.toString() + ", y: " + this.y.toString()

@@ -17,16 +17,14 @@ export function parseKle(kleText) {
     try {
         kleData = json5.parse(kleText)
         console.log("Parsed KLE data as json5: no-bracket (likely from downloaded JSON file")
-        console.log(kleData)
     } catch (error) {
         console.log("No-bracket was unparseable, trying with brackets added")
 
         try {
             kleData = json5.parse('[' + kleText + ']')
             console.log("Parsed KLE data as json5: with-bracket (likely pasted from the Raw Data tab)")
-            console.log(kleData)
         } catch (error) {
-            console.error("No-bracket was unparseable, giving up")
+            console.log("No-bracket was unparseable, giving up")
             return null
         }
 
@@ -89,6 +87,18 @@ export function parseKle(kleText) {
     let width2 = null;
     let height2 = null;
 
+    // Custom flags for this plategen
+    // _rs: Rotate stabilizers independently of the key (useful for bottom row stabs)
+    // _rc: Rotate switch cutouts independently of the key
+    // _ss: Shift stabilizers (Mainly for 6U off-center). false = Unshifted (default), true = Shifted
+    // _so: Skip automatic orientation fix 
+    //      By default, the plategen will auto-rotate vertically tall switches so that they are treated as wide keys rotated 90deg
+    //      Setting _so: true will skip this fix
+    let stabilizerAngle = new Decimal(0)
+    let independentSwitchAngle = new Decimal(0)
+    let shift6UStabilizers = false
+    let skipOrientationFix = false
+
     // The parsing bracket will be surrounded by a try-catch to expect malformed data
 
     try {
@@ -103,23 +113,25 @@ export function parseKle(kleText) {
                     // If previous decorator marked this key as a decal, reset the transients and skip
                     if (decal) {
                         decal = false
-                        width = new Decimal(1)
-                        height = new Decimal(1)
-                        continue
                     }
                     // Otherwise add the key
                     else {
-                        // First define and add the key
-                        let newKey = new Key(currX, currY, width, height, width2, height2, currAngle, currRotX, currRotY)
+                        // Define and add the key
+                        let newKey = new Key(currX, currY, width, height, width2, height2, currAngle, currRotX, currRotY, independentSwitchAngle, stabilizerAngle, shift6UStabilizers, skipOrientationFix)
                         keys.push(newKey)
-                        // Then conveniently use the current width value to increment the X cursor
-                        currX = currX.plus(width)
-                        // Finally reset the transients for the next key
-                        width = new Decimal(1)
-                        height = new Decimal(1)
-                        width2 = null
-                        height2 = null
                     }
+                    // Then conveniently use the current width value to increment the X cursor
+                    currX = currX.plus(width)
+                    // Finally reset the transients for the next key
+                    width = new Decimal(1)
+                    height = new Decimal(1)
+                    width2 = null
+                    height2 = null
+                    independentSwitchAngle = new Decimal(0)
+                    stabilizerAngle = new Decimal(0)
+                    shift6UStabilizers = false
+                    skipOrientationFix = false
+                    
                 }
 
                 // Case 2: Element is not a string and is therefore (should be) a decorator
@@ -129,9 +141,9 @@ export function parseKle(kleText) {
 
                     // Rotations
                     if (element.hasOwnProperty('r')) {
-                        Decimal.set({precision: 1000000, defaults: true})
+                        // Decimal.set({precision: 1000000, defaults: true})
                         currAngle = new Decimal(element.r)
-                        Decimal.set({defaults: true})
+                        // Decimal.set({defaults: true})
                     }
                     if (element.hasOwnProperty('rx')) {
                         currRotX = new Decimal(element.rx)
@@ -148,7 +160,7 @@ export function parseKle(kleText) {
 
                     // Transients
                     if (element.hasOwnProperty('d')) {
-                        decal = new Decimal(element.d)
+                        decal = element.d
                     }
                     if (element.hasOwnProperty('w')) {
                         width = new Decimal(element.w)
@@ -161,6 +173,18 @@ export function parseKle(kleText) {
                     }
                     if (element.hasOwnProperty('h2')) {
                         height2 = new Decimal(element.h2)
+                    }
+                    if (element.hasOwnProperty('_rs')) {
+                        stabilizerAngle = new Decimal(element._rs)
+                    }
+                    if (element.hasOwnProperty('_rc')) {
+                        independentSwitchAngle = new Decimal(element._rc)
+                    }
+                    if (element.hasOwnProperty('_ss')) {
+                        shift6UStabilizers = element._ss
+                    }
+                    if (element.hasOwnProperty('_so')) {
+                        skipOrientationFix = element._so
                     }
 
                     // Cursor offsets
