@@ -12,8 +12,10 @@ import { StabilizerMXBasic } from './cutouts/StabilizerMXBasic'
 import { StabilizerMXSmall } from './cutouts/StabilizerMXSmall'
 import { StabilizerAlpsAEK } from './cutouts/StabilizerAlpsAEK'
 import { StabilizerAlpsAT101 } from './cutouts/StabilizerAlpsAT101'
+import { NullGenerator } from './cutouts/NullGenerator'
 
-import { StabilizerNone } from './cutouts/StabilizerNone'
+import { AcousticMXBasic } from './cutouts/AcousticMXBasic'
+import { AcousticMXExtreme } from './cutouts/AcousticMXExtreme'
 
 
 export function buildPlate(keysArray, generatorOptions) {
@@ -68,12 +70,29 @@ export function buildPlate(keysArray, generatorOptions) {
             stabilizerGenerator = new StabilizerAlpsAT101();
             break;
         case "none":
-            stabilizerGenerator = new StabilizerNone();
+            stabilizerGenerator = new NullGenerator();
             break;
         default:
             console.error("Unsupported stabilizer type")
             return null
     }
+
+    let acousticGenerator = null
+    switch(generatorOptions.acousticCutoutType) {
+        case "none":
+            acousticGenerator = new NullGenerator();
+            break;
+        case "mx-basic":
+            acousticGenerator = new AcousticMXBasic();
+            break;
+        case "mx-extreme":
+            acousticGenerator = new AcousticMXExtreme();
+            break;
+        default:
+            console.error("Unsupported acoustic cutout type")
+            return null
+    }
+
 
 
 
@@ -97,6 +116,14 @@ export function buildPlate(keysArray, generatorOptions) {
             stabilizerCutout.origin = originNum
             stabilizerCutout = makerjs.model.rotate(stabilizerCutout, key.angle.plus(key.stabilizerAngle).times(-1).toNumber(), originNum)
             canvas.models["Stabilizer" + id.toString()] = stabilizerCutout
+        }
+
+        // Render acoustic cutouts
+        let acousticCutout = acousticGenerator.generate(key, generatorOptions)
+        if (acousticCutout) {
+            acousticCutout.origin = originNum
+            acousticCutout = makerjs.model.rotate(acousticCutout, key.angle.plus(key.stabilizerAngle).times(-1).toNumber(), originNum)
+            canvas.models["Acoustic" + id.toString()] = acousticCutout
         }
 
         // TODO: Render acoustic cutouts

@@ -1,8 +1,8 @@
 import { CutoutGenerator } from './CutoutGenerator'
 
-// No cutout stab generator
+// No cutout  generator
 
-export class StabilizerNone extends CutoutGenerator {
+export class NullGenerator extends CutoutGenerator {
 
     generate() {
         

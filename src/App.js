@@ -6,7 +6,7 @@ import Decimal from "decimal.js"
 import makerjs from 'makerjs'
 import fileDownload from 'js-file-download'
 import logo from './logo.png'
-import { DataHelpPane } from './HelpPanes'
+import { DataHelpPane, SwitchCutoutPane, OtherCutoutPane, AdvancedPane, AboutPane } from './HelpPanes'
 
 
 function App() {
@@ -28,13 +28,6 @@ function App() {
   const [unitHeight, setUnitHeight] = useState(19.05)
   const [kerf, setKerf] = useState(0)
 
-
-
-
-
-
-
-  // console.log(parseKle(kleText))
   useEffect(() => {
 
     const kleReturn = parseKle(kleText)
@@ -86,13 +79,14 @@ function App() {
     kerf
   ])
 
+
   const downloadData = (fileData, extension) => {
 
     const date = new Date(Date.now())
     fileDownload(fileData, "plate-" + date.toISOString() + extension)
 
-
   }
+
 
   return (
     <Container className="App justify-content-center" style={{ textAlign: "center" }}>
@@ -100,7 +94,7 @@ function App() {
       <div className="pt-4 pb-4">
         <Image fluid={true} src={logo} className="m-4" style={{ maxHeight: "100px" }} />
 
-        <h1>ai03 Plate Generator</h1>
+        <h1 style={{textTransform: "none"}}>ai03 Plate Generator</h1>
         <h5 className="pb-2">V2.0</h5>
         <p>An advanced plate generator with filleting, kerf, exact dimensions, and a variety of cutouts.</p>
       </div>
@@ -147,8 +141,8 @@ function App() {
                 >
                   <option value="mx-basic">Cherry MX Basic</option>
                   <option value="alps-skcm">Alps SKCM/L</option>
-                  <option value="choc-cpg1232">Kailh Choc CPG1232</option>
                   <option value="choc-cpg1350">Kailh Choc CPG1350</option>
+                  <option value="choc-cpg1232">Kailh Mini Choc CPG1232</option>
                   <option value="omron-b3g">Omron B3G/B3G-S</option>
                   <option value="alps-skcp">Alps SKCP</option>
                   
@@ -173,7 +167,7 @@ function App() {
                   onChange={e => setAcousticCutoutType(e.target.value)}
                 >
                   <option value="none">None</option>
-                  <option value="mx-standard">Cherry MX Standard</option>
+                  <option value="mx-basic">Cherry MX Basic</option>
                   <option value="mx-extreme">Cherry MX Extreme</option>
                 </Form.Select>
               </Form>
@@ -305,16 +299,16 @@ function App() {
                 <Nav.Link eventKey="data">Custom flags</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="second">Switch Cutout Types</Nav.Link>
+                <Nav.Link eventKey="switch-cutout">Switch Cutout Types</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="second">Switch Cutout Types</Nav.Link>
+                <Nav.Link eventKey="other-cutout">Other Cutout Types</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="second">Switch Cutout Types</Nav.Link>
+                <Nav.Link eventKey="advanced">Advanced</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="second">Switch Cutout Types</Nav.Link>
+                <Nav.Link eventKey="about">About</Nav.Link>
               </Nav.Item>
             </Nav>
           </Card.Header>
@@ -323,8 +317,17 @@ function App() {
               <Tab.Pane eventKey="data" style={{ textAlign: "left" }}>
                 <DataHelpPane />
               </Tab.Pane>
-              <Tab.Pane eventKey="second">
-                <DataHelpPane />
+              <Tab.Pane eventKey="switch-cutout" style={{ textAlign: "left" }}>
+                <SwitchCutoutPane />
+              </Tab.Pane>
+              <Tab.Pane eventKey="other-cutout" style={{ textAlign: "left" }}>
+                <OtherCutoutPane />
+              </Tab.Pane>
+              <Tab.Pane eventKey="advanced" style={{ textAlign: "left" }}>
+                <AdvancedPane />
+              </Tab.Pane>
+              <Tab.Pane eventKey="about" style={{ textAlign: "left" }}>
+                <AboutPane />
               </Tab.Pane>
             </Tab.Content>
           </Card.Body>
