@@ -92,7 +92,9 @@ function App() {
     <Container className="App justify-content-center" style={{ textAlign: "center" }}>
 
       <div className="pt-4 pb-4">
-        <Image fluid={true} src={logo} className="m-4" style={{ maxHeight: "100px" }} />
+        <a href="https://ai03.com/">
+          <Image fluid={true} src={logo} className="m-4" style={{ maxHeight: "100px" }} />
+        </a>
 
         <h1 style={{ textTransform: "none" }}>ai03 Plate Generator</h1>
         <h5 className="pb-2">V2.0</h5>
@@ -291,50 +293,50 @@ function App() {
 
       <Card className="rounded shadow overflow-hidden mb-5" >
 
-          <Tab.Container id="left-tabs-example" defaultActiveKey="data">
-            <Row>
-              <Col lg={4} as={Card.Header}>
-                <Nav variant="pills" className="flex-column">
-                  <Nav.Item className="me-0">
-                    <Nav.Link eventKey="data">Custom flags</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item className="me-0">
-                    <Nav.Link eventKey="switch-cutout">Switch Cutout Types</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item className="me-0">
-                    <Nav.Link eventKey="other-cutout">Other Cutout Types</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item className="me-0">
-                    <Nav.Link eventKey="advanced">Advanced</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item className="me-0">
-                    <Nav.Link eventKey="about">About</Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </Col>
-              <Col lg={8} as={Card.Body} className="p-4">
-                <Tab.Content>
-                  <Tab.Pane eventKey="data" style={{ textAlign: "left" }}>
-                    <DataHelpPane />
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="switch-cutout" style={{ textAlign: "left" }}>
-                    <SwitchCutoutPane />
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="other-cutout" style={{ textAlign: "left" }}>
-                    <OtherCutoutPane />
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="advanced" style={{ textAlign: "left" }}>
-                    <AdvancedPane />
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="about" style={{ textAlign: "left" }}>
-                    <AboutPane />
-                  </Tab.Pane>
-                </Tab.Content>
-              </Col>
+        <Tab.Container id="left-tabs-example" defaultActiveKey="data">
+          <Row>
+            <Col lg={4} as={Card.Header}>
+              <Nav variant="pills" className="flex-column">
+                <Nav.Item className="me-0">
+                  <Nav.Link eventKey="data">Custom flags</Nav.Link>
+                </Nav.Item>
+                <Nav.Item className="me-0">
+                  <Nav.Link eventKey="switch-cutout">Switch Cutout Types</Nav.Link>
+                </Nav.Item>
+                <Nav.Item className="me-0">
+                  <Nav.Link eventKey="other-cutout">Other Cutout Types</Nav.Link>
+                </Nav.Item>
+                <Nav.Item className="me-0">
+                  <Nav.Link eventKey="advanced">Advanced</Nav.Link>
+                </Nav.Item>
+                <Nav.Item className="me-0">
+                  <Nav.Link eventKey="about">About</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Col>
+            <Col lg={8} as={Card.Body} className="p-4">
+              <Tab.Content>
+                <Tab.Pane eventKey="data" style={{ textAlign: "left" }}>
+                  <DataHelpPane />
+                </Tab.Pane>
+                <Tab.Pane eventKey="switch-cutout" style={{ textAlign: "left" }}>
+                  <SwitchCutoutPane />
+                </Tab.Pane>
+                <Tab.Pane eventKey="other-cutout" style={{ textAlign: "left" }}>
+                  <OtherCutoutPane />
+                </Tab.Pane>
+                <Tab.Pane eventKey="advanced" style={{ textAlign: "left" }}>
+                  <AdvancedPane />
+                </Tab.Pane>
+                <Tab.Pane eventKey="about" style={{ textAlign: "left" }}>
+                  <AboutPane />
+                </Tab.Pane>
+              </Tab.Content>
+            </Col>
 
-            </Row>
+          </Row>
 
-          </Tab.Container>
+        </Tab.Container>
 
       </Card>
 
