@@ -2,9 +2,10 @@ import Decimal from 'decimal.js'
 import makerjs from 'makerjs'
 import { CutoutGenerator } from './CutoutGenerator'
 
-// Basic MX stabilizer cutout
+// Basic Alps stabilizer cutout
+// Generates sizes compatible with AEK stabs
 
-export class StabilizerMXBasic extends CutoutGenerator {
+export class StabilizerAlpsAEK extends CutoutGenerator {
 
     generate(key, generatorOptions) {
 
@@ -17,38 +18,27 @@ export class StabilizerMXBasic extends CutoutGenerator {
         let stab_spacing_left = null
         let stab_spacing_right = null
         
-        if (keySize.gte(8)) {
-            stab_spacing_left = stab_spacing_right = new Decimal("66.675")
-        }
-        else if (keySize.gte(7)) {
-            stab_spacing_left = stab_spacing_right = new Decimal("57.15")
+        if (keySize.gte(6.5)) {
+            stab_spacing_left = stab_spacing_right = new Decimal("45.3")
         }
         else if (keySize.gte(6.25)) {
-            stab_spacing_left = stab_spacing_right = new Decimal("50")
-        }
-        else if (keySize.gte(6)) {
-            if (key.shift6UStabilizers) {
-                stab_spacing_left = new Decimal("57.15")
-                stab_spacing_right = new Decimal("38.1")
-            } else {
-                stab_spacing_left = stab_spacing_right = new Decimal("47.625")
-            }
-        }
-        else if (keySize.gte(3)) {
-            stab_spacing_left = stab_spacing_right = new Decimal("19.05")
+            stab_spacing_left = stab_spacing_right = new Decimal("41.86")
         }
         else if (keySize.gte(2)) {
-            stab_spacing_left = stab_spacing_right = new Decimal("11.938")
+            stab_spacing_left = stab_spacing_right = new Decimal("14")
+        }
+        else if (keySize.gte(1.75)) {
+            stab_spacing_left = stab_spacing_right = new Decimal("12")
         }
         else {
             return null
         }
 
 
-        let upperLeft =  [new Decimal("-3.5").plus(generatorOptions.kerf).toNumber(), new Decimal("6").minus(generatorOptions.kerf).toNumber()]
-        let upperRight = [new Decimal("3.5").minus(generatorOptions.kerf).toNumber(), new Decimal("6").minus(generatorOptions.kerf).toNumber()]
-        let lowerLeft =  [new Decimal("-3.5").plus(generatorOptions.kerf).toNumber(), new Decimal("-9").plus(generatorOptions.kerf).toNumber()]
-        let lowerRight = [new Decimal("3.5").minus(generatorOptions.kerf).toNumber(), new Decimal("-9").plus(generatorOptions.kerf).toNumber()]
+        let upperLeft =  [new Decimal("-1.335").plus(generatorOptions.kerf).toNumber(), new Decimal("-3.875").minus(generatorOptions.kerf).toNumber()]
+        let upperRight = [new Decimal("1.335").minus(generatorOptions.kerf).toNumber(), new Decimal("-3.875").minus(generatorOptions.kerf).toNumber()]
+        let lowerLeft =  [new Decimal("-1.335").plus(generatorOptions.kerf).toNumber(), new Decimal("-9.085").plus(generatorOptions.kerf).toNumber()]
+        let lowerRight = [new Decimal("1.335").minus(generatorOptions.kerf).toNumber(), new Decimal("-9.085").plus(generatorOptions.kerf).toNumber()]
 
         var singleCutout = {
             paths: {

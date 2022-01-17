@@ -2,9 +2,9 @@ import Decimal from 'decimal.js'
 import makerjs from 'makerjs'
 import { CutoutGenerator } from './CutoutGenerator'
 
-// Basic MX stabilizer cutout
+// Smaller cutout that fits tightly against MX spec stabilizers
 
-export class StabilizerMXBasic extends CutoutGenerator {
+export class StabilizerMXSmall extends CutoutGenerator {
 
     generate(key, generatorOptions) {
 
@@ -45,10 +45,10 @@ export class StabilizerMXBasic extends CutoutGenerator {
         }
 
 
-        let upperLeft =  [new Decimal("-3.5").plus(generatorOptions.kerf).toNumber(), new Decimal("6").minus(generatorOptions.kerf).toNumber()]
-        let upperRight = [new Decimal("3.5").minus(generatorOptions.kerf).toNumber(), new Decimal("6").minus(generatorOptions.kerf).toNumber()]
-        let lowerLeft =  [new Decimal("-3.5").plus(generatorOptions.kerf).toNumber(), new Decimal("-9").plus(generatorOptions.kerf).toNumber()]
-        let lowerRight = [new Decimal("3.5").minus(generatorOptions.kerf).toNumber(), new Decimal("-9").plus(generatorOptions.kerf).toNumber()]
+        let upperLeft =  [new Decimal("-3.375").plus(generatorOptions.kerf).toNumber(), new Decimal("6").minus(generatorOptions.kerf).toNumber()]
+        let upperRight = [new Decimal("3.375").minus(generatorOptions.kerf).toNumber(), new Decimal("6").minus(generatorOptions.kerf).toNumber()]
+        let lowerLeft =  [new Decimal("-3.375").plus(generatorOptions.kerf).toNumber(), new Decimal("-8").plus(generatorOptions.kerf).toNumber()]
+        let lowerRight = [new Decimal("3.375").minus(generatorOptions.kerf).toNumber(), new Decimal("-8").plus(generatorOptions.kerf).toNumber()]
 
         var singleCutout = {
             paths: {

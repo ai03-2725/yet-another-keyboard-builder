@@ -1,7 +1,19 @@
-import { SwitchMXBasic } from './cutouts/SwitchMXBasic'
-import { StabilizerMXBasic } from './cutouts/StabilizerMXBasic'
 import makerjs from 'makerjs'
 import Decimal from 'decimal.js'
+
+import { SwitchMXBasic } from './cutouts/SwitchMXBasic'
+import { SwitchAlpsSKCM } from './cutouts/SwitchAlpsSKCM'
+import { SwitchAlpsSKCP } from './cutouts/SwitchAlpsSKCP'
+import { SwitchChocCPG1232 } from './cutouts/SwitchChocCPG1232'
+import { SwitchChocCPG1350 } from './cutouts/SwitchChocCPG1350'
+import { SwitchOmronB3G } from './cutouts/SwitchOmronB3G'
+
+import { StabilizerMXBasic } from './cutouts/StabilizerMXBasic'
+import { StabilizerMXSmall } from './cutouts/StabilizerMXSmall'
+import { StabilizerAlpsAEK } from './cutouts/StabilizerAlpsAEK'
+import { StabilizerAlpsAT101 } from './cutouts/StabilizerAlpsAT101'
+
+import { StabilizerNone } from './cutouts/StabilizerNone'
 
 
 export function buildPlate(keysArray, generatorOptions) {
@@ -15,8 +27,55 @@ export function buildPlate(keysArray, generatorOptions) {
     let maxX = new Decimal(Number.NEGATIVE_INFINITY)
     let maxY = new Decimal(Number.NEGATIVE_INFINITY)
 
-    let switchGenerator = new SwitchMXBasic()
-    let stabilizerGenerator = new StabilizerMXBasic()
+    let switchGenerator;
+    console.log(generatorOptions.switchCutoutType)
+    switch(generatorOptions.switchCutoutType) {
+        case "mx-basic":
+            switchGenerator = new SwitchMXBasic();
+            break;
+        case "alps-skcm":
+            switchGenerator = new SwitchAlpsSKCM();
+            break;
+        case "choc-cpg1232":
+            switchGenerator = new SwitchChocCPG1232();
+            break;
+        case "choc-cpg1350":
+            switchGenerator = new SwitchChocCPG1350();
+            break;
+        case "omron-b3g":
+            switchGenerator = new SwitchOmronB3G();
+            break;
+        case "alps-skcp":
+            switchGenerator = new SwitchAlpsSKCP();
+            break;
+        default:
+            console.error("Unsupported switch type")
+            return null
+    }
+
+    let stabilizerGenerator = null
+    switch(generatorOptions.stabilizerCutoutType) {
+        case "mx-basic":
+            stabilizerGenerator = new StabilizerMXBasic();
+            break;
+        case "mx-small":
+            stabilizerGenerator = new StabilizerMXSmall();
+            break;
+        case "alps-aek":
+            stabilizerGenerator = new StabilizerAlpsAEK();
+            break;
+        case "alps-at101":
+            stabilizerGenerator = new StabilizerAlpsAT101();
+            break;
+        case "none":
+            stabilizerGenerator = new StabilizerNone();
+            break;
+        default:
+            console.error("Unsupported stabilizer type")
+            return null
+    }
+
+
 
     for (const key of keysArray) {
 

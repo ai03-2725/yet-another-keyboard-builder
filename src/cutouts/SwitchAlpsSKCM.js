@@ -2,17 +2,18 @@ import Decimal from 'decimal.js'
 import makerjs from 'makerjs'
 import { CutoutGenerator } from './CutoutGenerator'
 
-// Basic MX switch cutout
-// Simple filleted square of 14mm size
+// Basic Alps SKCM/L switch cutout
 
-export class SwitchMXBasic extends CutoutGenerator {
+export class SwitchAlpsSKCM extends CutoutGenerator {
 
     generate(key, generatorOptions) {
 
-        let upperLeft =  [new Decimal(-7).plus(generatorOptions.kerf).toNumber(), new Decimal(7).minus(generatorOptions.kerf).toNumber()]
-        let upperRight = [new Decimal(7).minus(generatorOptions.kerf).toNumber(), new Decimal(7).minus(generatorOptions.kerf).toNumber()]
-        let lowerLeft =  [new Decimal(-7).plus(generatorOptions.kerf).toNumber(), new Decimal(-7).plus(generatorOptions.kerf).toNumber()]
-        let lowerRight = [new Decimal(7).minus(generatorOptions.kerf).toNumber(), new Decimal(-7).plus(generatorOptions.kerf).toNumber()]
+        // Cutout size is 15.5 x 12.8 mm
+
+        let upperLeft =  [new Decimal(-7.75).plus(generatorOptions.kerf).toNumber(), new Decimal(6.4).minus(generatorOptions.kerf).toNumber()]
+        let upperRight = [new Decimal(7.75).minus(generatorOptions.kerf).toNumber(), new Decimal(6.4).minus(generatorOptions.kerf).toNumber()]
+        let lowerLeft =  [new Decimal(-7.75).plus(generatorOptions.kerf).toNumber(), new Decimal(-6.4).plus(generatorOptions.kerf).toNumber()]
+        let lowerRight = [new Decimal(7.75).minus(generatorOptions.kerf).toNumber(), new Decimal(-6.4).plus(generatorOptions.kerf).toNumber()]
         
         var model = {
             paths: {

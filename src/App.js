@@ -147,6 +147,11 @@ function App() {
                 >
                   <option value="mx-basic">Cherry MX Basic</option>
                   <option value="alps-skcm">Alps SKCM/L</option>
+                  <option value="choc-cpg1232">Kailh Choc CPG1232</option>
+                  <option value="choc-cpg1350">Kailh Choc CPG1350</option>
+                  <option value="omron-b3g">Omron B3G/B3G-S</option>
+                  <option value="alps-skcp">Alps SKCP</option>
+                  
                 </Form.Select>
                 <Form.Label>Stabilizer Cutout Type</Form.Label>
                 <Form.Select aria-label="stabilizer-cutout-type"
@@ -155,9 +160,10 @@ function App() {
                   onChange={e => setStabilizerCutoutType(e.target.value)}
                 >
                   <option value="mx-basic">Cherry MX Basic</option>
-                  <option value="mx-large">Cherry MX Oversized</option>
                   <option value="mx-small">Cherry MX Tight Fit</option>
-                  <option value="mx-spec">Cherry MX Specdoc</option>
+                  <option value="alps-aek">Alps AEK</option>
+                  <option value="alps-at101">Alps AT101</option>
+                  <option value="none">None</option>
 
                 </Form.Select>
                 <Form.Label>Acoustic Cutout Type</Form.Label>
