@@ -2,8 +2,13 @@
 
 # ai03 Plate Generator v2
 Yet another mechanical keyboard plate generator.
-
-### Features
+  
+  
+## Try it live
+Available [here](https://kbplate.ai03.me/)
+  
+  
+## Features
 - A focus on exceptionally accurate plate generation
 - Various cutout types for a variety of switches
 - Various customizable dimensions such as fillets and kerf
