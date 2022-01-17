@@ -68,6 +68,11 @@ export function SwitchCutoutPane() {
             <h4>Alps SKCP</h4>
             <p>16 x 16 mm</p>
             <p>For Alps SKCP series switches.</p>
+            <br />
+            <h4>Hi-Tek 725</h4>
+            <p>15.62 x 15.62 mm</p>
+            <p>For NMB Hi-Tek 725 switches.</p>
+            
         </div>
     )
 }

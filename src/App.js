@@ -147,6 +147,7 @@ function App() {
                   <option value="choc-cpg1232">Kailh Mini Choc CPG1232</option>
                   <option value="omron-b3g">Omron B3G/B3G-S</option>
                   <option value="alps-skcp">Alps SKCP</option>
+                  <option value="hitek-725">Hi-Tek 725</option>
 
                 </Form.Select>
                 <Form.Label>Stabilizer Cutout Type</Form.Label>

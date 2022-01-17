@@ -7,6 +7,7 @@ import { SwitchAlpsSKCP } from './cutouts/SwitchAlpsSKCP'
 import { SwitchChocCPG1232 } from './cutouts/SwitchChocCPG1232'
 import { SwitchChocCPG1350 } from './cutouts/SwitchChocCPG1350'
 import { SwitchOmronB3G } from './cutouts/SwitchOmronB3G'
+import { SwitchHiTek725 } from './cutouts/SwitchHiTek725'
 
 import { StabilizerMXBasic } from './cutouts/StabilizerMXBasic'
 import { StabilizerMXSmall } from './cutouts/StabilizerMXSmall'
@@ -49,6 +50,9 @@ export function buildPlate(keysArray, generatorOptions) {
             break;
         case "alps-skcp":
             switchGenerator = new SwitchAlpsSKCP();
+            break;
+        case "hitek-725":
+            switchGenerator = new SwitchHiTek725();
             break;
         default:
             console.error("Unsupported switch type")

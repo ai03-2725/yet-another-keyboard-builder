@@ -4,8 +4,10 @@
 // Abstract CutoutSwitch class
 // Serves as a template and guideline for adding new switch cutouts
 
-// Name should be TypePartStyle, i.e. 
+// Name should be TypePart[Style], i.e. 
 // export class SwitchMXBasic extends CutoutGenerator {
+// export class SwitchAlpsSKCM extends CutoutGenerator {
+// etc
 
 export class CutoutGenerator {
 
@@ -32,9 +34,14 @@ export class CutoutGenerator {
     // Switch cutout generators are expected to return a maker.js model that can be added to the plate.
     // Stabilizer generators and similar may return null if inapplicable (i.e. 1U keys).
 
-    // Cutouts should be placed centered upright on the origin; the generator solely has to generate the correct cutout for the key's dimensions whereas 
-    // the PlateBuilder is responsible for placing the cutout itself onto the plate.
+    // Cutouts should be placed centered upright with the expectation that the switch coords are at the origin; the generator solely has to 
+    // generate the correct cutout for the key's dimensions whereas the PlateBuilder is responsible for placing the cutout itself onto the plate.
     // For example, a MX switch cutout would solely generate a square at the applicable position, which would almost always be the same cutout aside from cases such as stepped caps lock.
+
+    // After making the generator in the cutouts directory, add to the following:
+    // - Switch statement in PlateBuilder.js
+    // - Drop-down options in App.js
+    // - Cutout list in HelpPanes.js
 
     throw new Error("Method generate() must be implemented.");
   }
