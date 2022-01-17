@@ -50,7 +50,7 @@ function App() {
         setPreviewSvg(previewSvgData)
         const svgData = makerjs.exporter.toSVG(plateData, { units: makerjs.unitType.Millimeter })
         setPlateSvg(svgData)
-        const dxfData = makerjs.exporter.toDXF(plateData)
+        const dxfData = makerjs.exporter.toDXF(plateData, { units: makerjs.unitType.Millimeter })
         setPlateDxf(dxfData)
 
       } catch (error) {
