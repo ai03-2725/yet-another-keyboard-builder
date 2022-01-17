@@ -1,3 +1,5 @@
+![header](https://github.com/ai03-2725/yet-another-keyboard-builder/blob/main/public/opengraph.jpg)
+
 # ai03 Plate Generator v2
 Yet another mechanical keyboard plate generator.
 
