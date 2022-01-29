@@ -91,6 +91,10 @@ export function OtherCutoutPane() {
             <p>A smaller cutout that fits tightly around Cherry MX spec stabilizers.<br />
                 May not fit with oversized third party stabilizers.</p>
             <br />
+            <h4>Cherry MX Spec</h4>
+            <p>The exact stabilizer cutout specified by Cherry MX datasheets.<br />
+                Fillet radius should be either very small or 0 due to its intricate shape and tight fit.</p>
+            <br />
             <h4>Alps AEK</h4>
             <p>Alps-specific stabilizers for AEK stabilizer sizes.</p>
             <br />

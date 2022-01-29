@@ -11,6 +11,7 @@ import { SwitchHiTek725 } from './cutouts/SwitchHiTek725'
 
 import { StabilizerMXBasic } from './cutouts/StabilizerMXBasic'
 import { StabilizerMXSmall } from './cutouts/StabilizerMXSmall'
+import { StabilizerMXSpec } from './cutouts/StabilizerMXSpec'
 import { StabilizerAlpsAEK } from './cutouts/StabilizerAlpsAEK'
 import { StabilizerAlpsAT101 } from './cutouts/StabilizerAlpsAT101'
 import { NullGenerator } from './cutouts/NullGenerator'
@@ -32,7 +33,7 @@ export function buildPlate(keysArray, generatorOptions) {
 
     let switchGenerator;
     console.log(generatorOptions.switchCutoutType)
-    switch(generatorOptions.switchCutoutType) {
+    switch (generatorOptions.switchCutoutType) {
         case "mx-basic":
             switchGenerator = new SwitchMXBasic();
             break;
@@ -60,12 +61,15 @@ export function buildPlate(keysArray, generatorOptions) {
     }
 
     let stabilizerGenerator = null
-    switch(generatorOptions.stabilizerCutoutType) {
+    switch (generatorOptions.stabilizerCutoutType) {
         case "mx-basic":
             stabilizerGenerator = new StabilizerMXBasic();
             break;
         case "mx-small":
             stabilizerGenerator = new StabilizerMXSmall();
+            break;
+        case "mx-spec":
+            stabilizerGenerator = new StabilizerMXSpec();
             break;
         case "alps-aek":
             stabilizerGenerator = new StabilizerAlpsAEK();
@@ -82,7 +86,7 @@ export function buildPlate(keysArray, generatorOptions) {
     }
 
     let acousticGenerator = null
-    switch(generatorOptions.acousticCutoutType) {
+    switch (generatorOptions.acousticCutoutType) {
         case "none":
             acousticGenerator = new NullGenerator();
             break;
@@ -134,10 +138,10 @@ export function buildPlate(keysArray, generatorOptions) {
 
         let tempMinX = origin.x.minus(key.width.times(generatorOptions.unitWidth).times(0.5))
         let tempMaxX = origin.x.plus(key.width.times(generatorOptions.unitWidth).times(0.5))
-        
+
         let tempMinY = origin.y.minus(key.height.times(generatorOptions.unitHeight).times(0.5))
         let tempMaxY = origin.y.plus(key.height.times(generatorOptions.unitHeight).times(0.5))
-        
+
 
         if (tempMinX.lt(minX)) {
             minX = tempMinX
