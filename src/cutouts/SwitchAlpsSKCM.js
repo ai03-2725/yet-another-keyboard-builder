@@ -10,10 +10,17 @@ export class SwitchAlpsSKCM extends CutoutGenerator {
 
         // Cutout size is 15.5 x 12.8 mm
 
-        let upperLeft =  [new Decimal(-7.75).plus(generatorOptions.kerf).toNumber(), new Decimal(6.4).minus(generatorOptions.kerf).toNumber()]
-        let upperRight = [new Decimal(7.75).minus(generatorOptions.kerf).toNumber(), new Decimal(6.4).minus(generatorOptions.kerf).toNumber()]
-        let lowerLeft =  [new Decimal(-7.75).plus(generatorOptions.kerf).toNumber(), new Decimal(-6.4).plus(generatorOptions.kerf).toNumber()]
-        let lowerRight = [new Decimal(7.75).minus(generatorOptions.kerf).toNumber(), new Decimal(-6.4).plus(generatorOptions.kerf).toNumber()]
+        const width = new Decimal("15.5")
+        const height = new Decimal("12.8")
+        const plusHalfWidth = width.dividedBy(new Decimal("2"))
+        const minsHalfWidth = width.dividedBy(new Decimal("-2"))
+        const plusHalfHeight = height.dividedBy(new Decimal("2"))
+        const minsHalfHeight = height.dividedBy(new Decimal("-2"))
+        
+        let upperLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), plusHalfHeight.minus(generatorOptions.kerf).toNumber()]
+        let upperRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), plusHalfHeight.minus(generatorOptions.kerf).toNumber()]
+        let lowerLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), minsHalfHeight.plus(generatorOptions.kerf).toNumber()]
+        let lowerRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), minsHalfHeight.plus(generatorOptions.kerf).toNumber()]
         
         var model = {
             paths: {

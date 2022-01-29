@@ -34,11 +34,17 @@ export class StabilizerAlpsAEK extends CutoutGenerator {
             return null
         }
 
+        const width = new Decimal("2.67")
+        const upperBound = new Decimal("-3.875")
+        const lowerBound = new Decimal("-9.085")
 
-        let upperLeft =  [new Decimal("-1.335").plus(generatorOptions.kerf).toNumber(), new Decimal("-3.875").minus(generatorOptions.kerf).toNumber()]
-        let upperRight = [new Decimal("1.335").minus(generatorOptions.kerf).toNumber(), new Decimal("-3.875").minus(generatorOptions.kerf).toNumber()]
-        let lowerLeft =  [new Decimal("-1.335").plus(generatorOptions.kerf).toNumber(), new Decimal("-9.085").plus(generatorOptions.kerf).toNumber()]
-        let lowerRight = [new Decimal("1.335").minus(generatorOptions.kerf).toNumber(), new Decimal("-9.085").plus(generatorOptions.kerf).toNumber()]
+        const plusHalfWidth = width.dividedBy(new Decimal("2"))
+        const minsHalfWidth = width.dividedBy(new Decimal("-2"))
+        
+        let upperLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), upperBound.minus(generatorOptions.kerf).toNumber()]
+        let upperRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), upperBound.minus(generatorOptions.kerf).toNumber()]
+        let lowerLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), lowerBound.plus(generatorOptions.kerf).toNumber()]
+        let lowerRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), lowerBound.plus(generatorOptions.kerf).toNumber()]
 
         var singleCutout = {
             paths: {

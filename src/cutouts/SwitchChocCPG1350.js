@@ -8,12 +8,21 @@ export class SwitchChocCPG1350 extends CutoutGenerator {
 
     generate(key, generatorOptions) {
 
-        // Cutout size = 13.82 x 13.82mm
+        // Kailh MX datasheet specifies 13.95+-0.05mm for the part that clips into the plate
+        // On the Choc datasheet, the equivalent dimen is marked 13.8mm with a tolerance of 0.2mm
+        // Therefore, upper bound is 14mm and cutout size should be 14 x 14
 
-        let upperLeft =  [new Decimal(-6.91).plus(generatorOptions.kerf).toNumber(), new Decimal(6.91).minus(generatorOptions.kerf).toNumber()]
-        let upperRight = [new Decimal(6.91).minus(generatorOptions.kerf).toNumber(), new Decimal(6.91).minus(generatorOptions.kerf).toNumber()]
-        let lowerLeft =  [new Decimal(-6.91).plus(generatorOptions.kerf).toNumber(), new Decimal(-6.91).plus(generatorOptions.kerf).toNumber()]
-        let lowerRight = [new Decimal(6.91).minus(generatorOptions.kerf).toNumber(), new Decimal(-6.91).plus(generatorOptions.kerf).toNumber()]
+        const width = new Decimal("14")
+        const height = new Decimal("14")
+        const plusHalfWidth = width.dividedBy(new Decimal("2"))
+        const minsHalfWidth = width.dividedBy(new Decimal("-2"))
+        const plusHalfHeight = height.dividedBy(new Decimal("2"))
+        const minsHalfHeight = height.dividedBy(new Decimal("-2"))
+        
+        let upperLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), plusHalfHeight.minus(generatorOptions.kerf).toNumber()]
+        let upperRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), plusHalfHeight.minus(generatorOptions.kerf).toNumber()]
+        let lowerLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), minsHalfHeight.plus(generatorOptions.kerf).toNumber()]
+        let lowerRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), minsHalfHeight.plus(generatorOptions.kerf).toNumber()]
         
         var model = {
             paths: {

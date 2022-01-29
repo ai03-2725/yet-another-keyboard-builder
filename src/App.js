@@ -115,7 +115,7 @@ function App() {
                   type="text"
                   style={{ fontFamily: 'monospace', height: '20vh', minHeight: "225px" }}
                   spellCheck="false"
-                  placeholder="Paste KLE raw data here"
+                  placeholder="Paste KLE raw data or JSON here"
                   onChange={text => setKleText(text.target.value)} />
               </Form>
             </Col>

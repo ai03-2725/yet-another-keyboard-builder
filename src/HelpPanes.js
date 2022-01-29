@@ -53,11 +53,12 @@ export function SwitchCutoutPane() {
             <p>For Alps SKCM and SKCL series switches.</p>
             <br />
             <h4>Choc CPG1350</h4>
-            <p>13.82 x 13.82mm</p>
-            <p>For Kailh Choc V1 CPG1350 switches with a travel distance of 3.0mm.</p>
+            <p>14 x 14mm</p>
+            <p>For Kailh Choc V1 CPG1350 switches with a travel distance of 3.0mm.<br />
+            Identical cutout to basic Cherry MX switches.</p>
             <br />
             <h4>Mini Choc CPG1232</h4>
-            <p>13.52 x 13.52 mm</p>
+            <p>13.7 x 12.7 mm</p>
             <p>For Choc CPG1232 switches, marketed by Kailh as "Mini Choc".<br />
                 Has a travel distance of 2.4mm.</p>
             <br />
@@ -70,7 +71,7 @@ export function SwitchCutoutPane() {
             <p>For Alps SKCP series switches.</p>
             <br />
             <h4>Hi-Tek 725</h4>
-            <p>15.62 x 15.62 mm</p>
+            <p>15.621 x 15.621 mm (0.615 in)</p>
             <p>For NMB Hi-Tek 725 switches.</p>
             
         </div>
@@ -131,6 +132,7 @@ export function AboutPane() {
             <h2>ai03 Plate Generator</h2>
             <p>Originally written in Python as a CLI and server-side tool; now rewritten as a client-side webapp.<br />
                 The goal is to provide a production-tested, exceptionally accurate, versatile plate generator for all who make keyboards.</p>
+                <br/>
             <h4>Credits</h4>
             <p>The following people have contributed help and/or information for making this project possible. <br />
                 huygn<br />
@@ -142,6 +144,7 @@ export function AboutPane() {
                 Senter<br />
                 Pwner<br />
                 Kevinplus</p>
+                <br/>
             <h4>Contributing</h4>
             <p>Please visit the <a href="https://github.com/ai03-2725/yet-another-keyboard-builder">source repository</a> for more info.</p>
         </div>

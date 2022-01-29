@@ -30,11 +30,17 @@ export class AcousticMXExtreme extends CutoutGenerator {
             return null
         }
 
+        const width = new Decimal("2")
+        const height = new Decimal("14")
+        const plusHalfWidth = width.dividedBy(new Decimal("2"))
+        const minsHalfWidth = width.dividedBy(new Decimal("-2"))
+        const plusHalfHeight = height.dividedBy(new Decimal("2"))
+        const minsHalfHeight = height.dividedBy(new Decimal("-2"))
 
-        let upperLeft =  [new Decimal("-1").plus(generatorOptions.kerf).toNumber(), new Decimal("7").minus(generatorOptions.kerf).toNumber()]
-        let upperRight = [new Decimal("1").minus(generatorOptions.kerf).toNumber(), new Decimal("7").minus(generatorOptions.kerf).toNumber()]
-        let lowerLeft =  [new Decimal("-1").plus(generatorOptions.kerf).toNumber(), new Decimal("-7").plus(generatorOptions.kerf).toNumber()]
-        let lowerRight = [new Decimal("1").minus(generatorOptions.kerf).toNumber(), new Decimal("-7").plus(generatorOptions.kerf).toNumber()]
+        let upperLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), plusHalfHeight.minus(generatorOptions.kerf).toNumber()]
+        let upperRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), plusHalfHeight.minus(generatorOptions.kerf).toNumber()]
+        let lowerLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), minsHalfHeight.plus(generatorOptions.kerf).toNumber()]
+        let lowerRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), minsHalfHeight.plus(generatorOptions.kerf).toNumber()]
 
         var singleCutout = {
             paths: {

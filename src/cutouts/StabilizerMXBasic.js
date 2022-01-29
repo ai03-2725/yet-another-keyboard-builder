@@ -44,11 +44,17 @@ export class StabilizerMXBasic extends CutoutGenerator {
             return null
         }
 
+        const width = new Decimal("7")
+        const upperBound = new Decimal("6")
+        const lowerBound = new Decimal("-9")
 
-        let upperLeft =  [new Decimal("-3.5").plus(generatorOptions.kerf).toNumber(), new Decimal("6").minus(generatorOptions.kerf).toNumber()]
-        let upperRight = [new Decimal("3.5").minus(generatorOptions.kerf).toNumber(), new Decimal("6").minus(generatorOptions.kerf).toNumber()]
-        let lowerLeft =  [new Decimal("-3.5").plus(generatorOptions.kerf).toNumber(), new Decimal("-9").plus(generatorOptions.kerf).toNumber()]
-        let lowerRight = [new Decimal("3.5").minus(generatorOptions.kerf).toNumber(), new Decimal("-9").plus(generatorOptions.kerf).toNumber()]
+        const plusHalfWidth = width.dividedBy(new Decimal("2"))
+        const minsHalfWidth = width.dividedBy(new Decimal("-2"))
+        
+        let upperLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), upperBound.minus(generatorOptions.kerf).toNumber()]
+        let upperRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), upperBound.minus(generatorOptions.kerf).toNumber()]
+        let lowerLeft =  [minsHalfWidth.plus(generatorOptions.kerf).toNumber(), lowerBound.plus(generatorOptions.kerf).toNumber()]
+        let lowerRight = [plusHalfWidth.minus(generatorOptions.kerf).toNumber(), lowerBound.plus(generatorOptions.kerf).toNumber()]
 
         var singleCutout = {
             paths: {
