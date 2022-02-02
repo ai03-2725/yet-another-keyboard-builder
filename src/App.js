@@ -148,6 +148,7 @@ function App() {
                   <option value="omron-b3g">Omron B3G/B3G-S</option>
                   <option value="alps-skcp">Alps SKCP</option>
                   <option value="hitek-725">Hi-Tek 725</option>
+                  <option value="i-rocks">i-Rocks</option>
 
                 </Form.Select>
                 <Form.Label>Stabilizer Cutout Type</Form.Label>

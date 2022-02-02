@@ -73,6 +73,10 @@ export function SwitchCutoutPane() {
             <h4>Hi-Tek 725</h4>
             <p>15.621 x 15.621 mm (0.615 in)</p>
             <p>For NMB Hi-Tek 725 switches.</p>
+            <br />
+            <h4>i-Rocks</h4>
+            <p>15.8 x 13.4 mm</p>
+            <p>For i-Rocks mechanical switches.</p>
             
         </div>
     )
