@@ -9,6 +9,7 @@ import { SwitchChocCPG1350 } from './cutouts/SwitchChocCPG1350'
 import { SwitchOmronB3G } from './cutouts/SwitchOmronB3G'
 import { SwitchHiTek725 } from './cutouts/SwitchHiTek725'
 import { SwitchIRocks } from './cutouts/SwitchIRocks'
+import { SwitchFutabaMA } from './cutouts/SwitchFutabaMA'
 
 import { StabilizerMXBasic } from './cutouts/StabilizerMXBasic'
 import { StabilizerMXSmall } from './cutouts/StabilizerMXSmall'
@@ -58,6 +59,9 @@ export function buildPlate(keysArray, generatorOptions) {
             break;
         case "i-rocks":
             switchGenerator = new SwitchIRocks();
+            break;
+        case "futaba-ma":
+            switchGenerator = new SwitchFutabaMA();
             break;
         default:
             console.error("Unsupported switch type")
