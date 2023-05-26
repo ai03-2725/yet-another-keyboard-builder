@@ -77,6 +77,10 @@ export function SwitchCutoutPane() {
             <h4>i-Rocks</h4>
             <p>15.8 x 13.4 mm</p>
             <p>For i-Rocks mechanical switches.</p>
+            <br />
+            <h4>Futaba MA</h4>
+            <p>14 x 15 mm</p>
+            <p>For Futaba MA mechanical switches.</p>
             
         </div>
     )
