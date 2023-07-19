@@ -150,6 +150,7 @@ function App() {
                   <option value="hitek-725">Hi-Tek 725</option>
                   <option value="i-rocks">i-Rocks</option>
                   <option value="futaba-ma">Futaba MA</option>
+                  <option value="topre-fillet">Topre Filleted</option>
 
                 </Form.Select>
                 <Form.Label>Stabilizer Cutout Type</Form.Label>

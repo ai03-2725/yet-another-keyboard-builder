@@ -81,6 +81,9 @@ export function SwitchCutoutPane() {
             <h4>Futaba MA</h4>
             <p>14 x 15 mm</p>
             <p>For Futaba MA mechanical switches.</p>
+            <h4>Topre Filleted</h4>
+            <p>14.2 x 14.8 mm</p>
+            <p>For EC Topre Housing with Filleted Cutout.</p>
             
         </div>
     )
