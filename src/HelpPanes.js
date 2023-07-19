@@ -81,6 +81,9 @@ export function SwitchCutoutPane() {
             <h4>Futaba MA</h4>
             <p>14 x 15 mm</p>
             <p>For Futaba MA mechanical switches.</p>
+            <h4>Topre Filleted</h4>
+            <p>14.2 x 14.8 mm</p>
+            <p>For EC Topre Housing with Filleted Cutout.</p>
             
         </div>
     )
@@ -98,6 +101,9 @@ export function OtherCutoutPane() {
             <h4>Cherry MX Tight Fit</h4>
             <p>A smaller cutout that fits tightly around Cherry MX spec stabilizers.<br />
                 May not fit with oversized third party stabilizers.</p>
+            <br />
+            <h4>Cherry MX Wide Fit</h4>
+            <p>A wider cutout that fits for bigger housing third-party stabilizers.</p>
             <br />
             <h4>Cherry MX Spec</h4>
             <p>The exact stabilizer cutout specified by Cherry MX datasheets.<br />

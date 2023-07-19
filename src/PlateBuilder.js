@@ -10,10 +10,12 @@ import { SwitchOmronB3G } from './cutouts/SwitchOmronB3G'
 import { SwitchHiTek725 } from './cutouts/SwitchHiTek725'
 import { SwitchIRocks } from './cutouts/SwitchIRocks'
 import { SwitchFutabaMA } from './cutouts/SwitchFutabaMA'
+import { SwitchTopreFillet } from './cutouts/SwitchTopreFillet'
 
 import { StabilizerMXBasic } from './cutouts/StabilizerMXBasic'
 import { StabilizerMXSmall } from './cutouts/StabilizerMXSmall'
 import { StabilizerMXSpec } from './cutouts/StabilizerMXSpec'
+import { StabilizerMXWide } from './cutouts/StabilizerMXWide'
 import { StabilizerAlpsAEK } from './cutouts/StabilizerAlpsAEK'
 import { StabilizerAlpsAT101 } from './cutouts/StabilizerAlpsAT101'
 import { NullGenerator } from './cutouts/NullGenerator'
@@ -63,6 +65,9 @@ export function buildPlate(keysArray, generatorOptions) {
         case "futaba-ma":
             switchGenerator = new SwitchFutabaMA();
             break;
+        case "topre-fillet":
+            switchGenerator = new SwitchTopreFillet();
+            break;
         default:
             console.error("Unsupported switch type")
             return null
@@ -78,6 +83,9 @@ export function buildPlate(keysArray, generatorOptions) {
             break;
         case "mx-spec":
             stabilizerGenerator = new StabilizerMXSpec();
+            break;
+        case "mx-wide":
+            stabilizerGenerator = new StabilizerMXWide();
             break;
         case "alps-aek":
             stabilizerGenerator = new StabilizerAlpsAEK();

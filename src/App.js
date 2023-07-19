@@ -150,6 +150,7 @@ function App() {
                   <option value="hitek-725">Hi-Tek 725</option>
                   <option value="i-rocks">i-Rocks</option>
                   <option value="futaba-ma">Futaba MA</option>
+                  <option value="topre-fillet">Topre Filleted</option>
 
                 </Form.Select>
                 <Form.Label>Stabilizer Cutout Type</Form.Label>
@@ -160,6 +161,7 @@ function App() {
                 >
                   <option value="mx-basic">Cherry MX Basic</option>
                   <option value="mx-small">Cherry MX Tight Fit</option>
+                  <option value="mx-wide">Cherry MX Wide Fit</option>
                   <option value="mx-spec">Cherry MX Spec</option>
                   <option value="alps-aek">Alps AEK</option>
                   <option value="alps-at101">Alps AT101</option>
