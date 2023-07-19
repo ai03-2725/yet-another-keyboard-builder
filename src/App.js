@@ -160,6 +160,7 @@ function App() {
                 >
                   <option value="mx-basic">Cherry MX Basic</option>
                   <option value="mx-small">Cherry MX Tight Fit</option>
+                  <option value="mx-wide">Cherry MX Wide Fit</option>
                   <option value="mx-spec">Cherry MX Spec</option>
                   <option value="alps-aek">Alps AEK</option>
                   <option value="alps-at101">Alps AT101</option>

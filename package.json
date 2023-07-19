@@ -44,6 +44,6 @@
   },
   "devDependencies": {
     "mini-css-extract-plugin": "2.4.5",
-    "react-scripts": "5.0.0"
+    "react-scripts": "^5.0.0"
   }
 }
