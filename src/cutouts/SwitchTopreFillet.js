@@ -2,8 +2,8 @@ import Decimal from 'decimal.js'
 import makerjs from 'makerjs'
 import { CutoutGenerator } from './CutoutGenerator'
 
-// Basic MX switch cutout
-// Simple filleted square of 14mm size
+// Filleted EC Topre Housing Cutout
+// 14.8mm x 14.2mm Meassurement
 
 export class SwitchTopreFillet extends CutoutGenerator {
 
